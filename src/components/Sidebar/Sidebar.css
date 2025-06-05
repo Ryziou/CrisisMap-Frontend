@@ -1,0 +1,101 @@
+.sidebar-tab {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 100%;
+  background-color: #fff;
+  z-index: 1000;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.sidebar-closebtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sidetab-list {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.sidetab-btn {
+  flex: 1;
+  padding: 0.75rem;
+  text-align: center;
+  background: none;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  color: #333;
+}
+
+.sidetab-btn[aria-selected="true"] {
+  border-bottom: 3px solid #000;
+  font-weight: bold;
+}
+
+.sidetab-btn:hover {
+    background-color: #ededed
+}
+
+.sidetab-panel {
+  padding: 1rem;
+}
+
+.disaster-link {
+  display: block;
+  margin-top: 0.5rem;
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.disaster-type {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-small {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-tiny {
+  width: 16px;
+  height: 16px;
+}
+
+.sidetab-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.status-Alert {
+    color: red;
+}
+
+.status-Past {
+    color: #4783fc;
+}
+
+.status-Ongoing {
+    color: #cf9800;
+}
