@@ -32,6 +32,8 @@ export default function Navbar() {
                 </Menu>
             </div>
 
+            <h1 className="navbar-title">CrisisMap</h1>
+
             <div className="nav-group">
                 <Menu as='div' className='menu-wrapper'>
                     <MenuButton className='btn-menu'>
