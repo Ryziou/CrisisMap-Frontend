@@ -31,8 +31,9 @@ export default function Navbar() {
                     </MenuItems>
                 </Menu>
             </div>
-
+            <NavLink to='/' className='navbar-title'>
             <h1 className="navbar-title">CrisisMap</h1>
+            </NavLink>
 
             <div className="nav-group">
                 <Menu as='div' className='menu-wrapper'>
@@ -43,10 +44,7 @@ export default function Navbar() {
                         {user
                             ? (
                                 <>
-                                    <MenuItem as={NavLink} to='/create'>
-                                        Create Event
-                                    </MenuItem>
-                                    <MenuItem as={NavLink} to='/login' onClick={handleSignOut}>
+                                    <MenuItem as={NavLink} to='/' onClick={handleSignOut}>
                                         Log Out
                                     </MenuItem>
                                 </>
@@ -54,10 +52,10 @@ export default function Navbar() {
                             :
                             (
                                 <>
-                                    <MenuItem as={NavLink} to='/register'>
+                                    <MenuItem as={NavLink} to='/authenticate?tab=register'>
                                         Register
                                     </MenuItem>
-                                    <MenuItem as={NavLink} to='/login'>
+                                    <MenuItem as={NavLink} to='/authenticate?tab=login'>
                                         Login
                                     </MenuItem>
                                 </>
