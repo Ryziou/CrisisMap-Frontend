@@ -40,7 +40,7 @@ export const updateComment = async (commentId, formData) => {
 
 export const deleteComment = async (commentId) => {
     try {
-        return axios.delete(`${BASE_URL}/comments/${commentId}`, {
+        return axios.delete(`${BASE_URL}/comments/${commentId}/`, {
             headers: {
                 Authorization: `Bearer ${getToken()}`
             }
