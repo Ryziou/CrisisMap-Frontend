@@ -6,6 +6,8 @@ import './Sidebar.css'
 import { useContext, useEffect, useState } from 'react'
 import { getComments, createComment, updateComment, deleteComment } from '../../services/comments'
 import { UserContext } from '../../contexts/UserContext'
+import { NavLink } from 'react-router'
+import { formatDates } from '../../lib/dateFormatter'
 
 
 export default function Sidebar({ disaster, onClose }) {
@@ -22,6 +24,13 @@ export default function Sidebar({ disaster, onClose }) {
     const [newFormData, setNewFormData] = useState({
         content: formData.content
     })
+    const perPage = 5
+    const [page, setPage] = useState(0)
+    const start = page * perPage
+    const end = start + perPage
+    const paginatedComments = comments.slice(start, end)
+    const totalPages = Math.ceil(comments.length / perPage)
+
 
 
     async function handleSubmit(e) {
@@ -106,16 +115,16 @@ export default function Sidebar({ disaster, onClose }) {
     }
 
     useEffect(() => {
-    async function fetchComments() {
+        async function fetchComments() {
 
-        try {
-            const { data } = await getComments(disaster.id)
-            setComments(data)
-        } catch (error) {
-            setError('Failed to load comments');
-            console.log(error);
+            try {
+                const { data } = await getComments(disaster.id)
+                setComments(data)
+            } catch (error) {
+                setError('Failed to load comments');
+                console.log(error);
+            }
         }
-    }
         if (disaster.id) {
             fetchComments()
         }
@@ -210,47 +219,69 @@ export default function Sidebar({ disaster, onClose }) {
 
                         }
 
-                        {comments.length > 0
-                            ? comments.map(comment => (
-                                <div key={comment.id} className='comment-container'>
-                                    {user && editComment && editComment.id === comment.id
-                                        ? (
-                                            <form onSubmit={handleSubmit}>
-                                                {editError.content && <p className="comment-error">{editError.content}</p>}
-                                                <Textarea className='comment-edit'
-                                                    placeholder='Write a comment...'
-                                                    rows='10'
-                                                    cols='35'
-                                                    value={newFormData.content}
-                                                    onChange={handleChange}
-                                                >
-                                                </Textarea>
-                                                <Button className='comment-submit' type='submit'>Update Comment</Button>
-                                                <Button className='comment-cancel' type='button' onClick={handleCancel}>Cancel</Button>
-                                            </form>
-                                        ) : (
-                                            <>
-                                                <div className="comment-info">
-                                                    <h3 className='comment-author'>
-                                                        <a href="">{comment.author_username}</a>
-                                                    </h3>
-                                                    <p className='comment-text'>{comment.content}</p>
-                                                    {user && comment.author && comment.author === user.id && (
-                                                        <div className="comment-controls">
-                                                            <TrashIcon className='icon-small controls' onClick={() => handleDeleteBtn(comment.id)} />
-                                                            <PencilIcon className='icon-small controls' onClick={() => handleEditBtn(comment)} />
+                        {paginatedComments.length > 0
+                            ? (<>
+                                {paginatedComments.map(comment => (
+                                    <div key={comment.id} className='comment-container'>
+                                        {user && editComment && editComment.id === comment.id
+                                            ? (
+                                                <form onSubmit={handleSubmit}>
+                                                    {editError.content && <p className="comment-error">{editError.content}</p>}
+                                                    <Textarea className='comment-edit'
+                                                        placeholder='Write a comment...'
+                                                        rows='10'
+                                                        cols='35'
+                                                        value={newFormData.content}
+                                                        onChange={handleChange}
+                                                    >
+                                                    </Textarea>
+                                                    <Button className='comment-submit' type='submit'>Update Comment</Button>
+                                                    <Button className='comment-cancel' type='button' onClick={handleCancel}>Cancel</Button>
+                                                </form>
+                                            ) : (
+                                                <>
+                                                    <div className="comment-info">
+                                                        <h3 className='comment-author'>
+                                                            <NavLink to={`/profile/${comment.author}`}>{comment.author_username}</NavLink>
+                                                        </h3>
+                                                        <p className='comment-text'>{comment.content}</p>
+                                                        {user && comment.author && comment.author === user.id && (
+                                                            <div className="comment-controls">
+                                                                <TrashIcon className='icon-small controls' onClick={() => handleDeleteBtn(comment.id)} />
+                                                                <PencilIcon className='icon-small controls' onClick={() => handleEditBtn(comment)} />
+                                                            </div>
+                                                        )}
+                                                        <div className="comment-info">
+                                                            <small>
+                                                                {formatDates(comment.created_at, comment.event)} - <NavLink to={`/map?event=${comment.event}`}>{comment.event}</NavLink>
+                                                            </small>
                                                         </div>
-                                                    )}
-                                                </div>
-                                            </>
-                                        )
-
-
-                                    }
+                                                    </div>
+                                                </>
+                                            )}
+                                    </div>
+                                ))}
+                                <div className="pagination-controls">
+                                    <Button
+                                        type="button"
+                                        onClick={() => setPage(p => Math.max(0, p - 1))}
+                                        disabled={page === 0}
+                                    >
+                                        Previous
+                                    </Button>
+                                    <span>{page + 1} of {totalPages}</span>
+                                    <Button
+                                        type="button"
+                                        onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
+                                        disabled={page === totalPages - 1}
+                                    >
+                                        Next
+                                    </Button>
                                 </div>
-                            ))
-                            : <p className='comment-empty'>No comments yet.</p>
-                        }
+                            </>
+                            ) : (
+                                <p className='comment-empty'>No comments yet.</p>
+                            )}
                     </TabPanel>
                 </TabPanels>
             </TabGroup>

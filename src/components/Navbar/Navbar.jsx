@@ -32,7 +32,7 @@ export default function Navbar() {
                 </Menu>
             </div>
             <NavLink to='/' className='navbar-title'>
-            <h1 className="navbar-title">CrisisMap</h1>
+                <h1 className="navbar-title">CrisisMap</h1>
             </NavLink>
 
             <div className="nav-group">
@@ -44,6 +44,9 @@ export default function Navbar() {
                         {user
                             ? (
                                 <>
+                                    <MenuItem as={NavLink} to='/profile'>
+                                        {user.username}
+                                    </MenuItem>
                                     <MenuItem as={NavLink} to='/' onClick={handleSignOut}>
                                         Log Out
                                     </MenuItem>

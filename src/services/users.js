@@ -5,7 +5,11 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 export const getOwnProfile = async () => {
     try {
-        return axios.get(`${BASE_URL}/auth/profile/`)
+        return axios.get(`${BASE_URL}/auth/profile/`, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            }
+        })
     } catch (error) {
         console.log(error);
         throw error
@@ -14,10 +18,14 @@ export const getOwnProfile = async () => {
 
 export const getPublicProfile = async (userId) => {
     try {
-        return axios.get(`${BASE_URL}/auth/profile/${userId}`)
+        return axios.get(`${BASE_URL}/auth/profile/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            }
+        })
     } catch (error) {
         console.log(error);
-        
+        throw error
     }
 }
 
@@ -37,6 +45,19 @@ export const updateProfile = async (userId, formData) => {
 export const deleteProfile = async (userId) => {
     try {
         return axios.delete(`${BASE_URL}/auth/profile/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            }
+        })
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
+export const getUserComments = async (userId) => {
+    try {
+        return axios.get(`${BASE_URL}/comments/?user=${userId}`, {
             headers: {
                 Authorization: `Bearer ${getToken()}`
             }
