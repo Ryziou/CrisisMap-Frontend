@@ -48,7 +48,7 @@
 }
 
 .sidetab-btn:hover {
-    background-color: #ededed
+  background-color: #ededed
 }
 
 .sidetab-panel {
@@ -65,8 +65,8 @@
 }
 
 .disaster-type {
-    margin-top: 1px;
-    margin-bottom: 1px;
+  margin-top: 1px;
+  margin-bottom: 1px;
 }
 
 .disaster-description {
@@ -107,7 +107,7 @@
   word-wrap: break-word;
   white-space: pre-wrap;
   width: 100%;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   max-width: 100%;
 }
 
@@ -179,15 +179,15 @@
 }
 
 .status-Alert {
-    color: red;
+  color: red;
 }
 
 .status-Past {
-    color: #4783fc;
+  color: #4783fc;
 }
 
 .status-Ongoing {
-    color: #cf9800;
+  color: #cf9800;
 }
 
 .comment-error {

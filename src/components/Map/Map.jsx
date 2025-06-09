@@ -4,11 +4,15 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { getDisasters } from '../../services/reliefDisasters'
 import SidebarTab from '../Sidebar/Sidebar'
+import { useSearchParams } from 'react-router'
 
 export default function Map() {
     const mapRef = useRef()
     const mapContainerRef = useRef()
     const [selectedDisaster, setSelectedDisaster] = useState(null)
+    const [disasters, setDisasters] = useState([])
+    const [searchParams] = useSearchParams()
+    const eventIdFocuser = searchParams.get('event')
 
     useEffect(() => {
         mapboxgl.accessToken = import.meta.env.VITE_API_SECRET_TOKEN
@@ -18,10 +22,16 @@ export default function Map() {
             zoom: 4
         });
 
+        mapRef.current.on('load', () => {
+            fetchDisasters()
+        })
+
         const fetchDisasters = async () => {
             try {
                 const { data } = await getDisasters()
                 const events = data.data
+                setDisasters(events)
+
                 const markerIcons = {
                     alert: '/red.png',
                     ongoing: '/yellow.png',
@@ -53,22 +63,39 @@ export default function Map() {
 
             }
         }
-
-        fetchDisasters()
-
         return () => {
             mapRef.current.remove();
         };
     }, []);
 
-    return (
-        <>
+    useEffect(() => {
+        if (!eventIdFocuser || disasters.length === 0 || !mapRef.current) return
+
+        const target = disasters.find(d => String(d.fields.id) === eventIdFocuser)
+        if (target) {
+            const lat = target.fields.primary_country.location.lat
+            const long = target.fields.primary_country.location.lon
+
+            mapRef.current.flyTo({
+                center: [long, lat],
+                zoom: 5.5,
+                speed: 0.35,
+                curve: 1.4
+            })
+            setSelectedDisaster(target.fields)
+        }
+
+    
+    }, [eventIdFocuser, disasters])
+
+return (
+    <>
         <div className="map-holder">
-        {selectedDisaster && (
-            <SidebarTab disaster={selectedDisaster} onClose={() => setSelectedDisaster(null)} />
-        )}
-        <div ref={mapContainerRef} className='map-container' />
+            {selectedDisaster && (
+                <SidebarTab disaster={selectedDisaster} onClose={() => setSelectedDisaster(null)} />
+            )}
+            <div ref={mapContainerRef} className='map-container' />
         </div>
-        </>
-    )
+    </>
+)
 };

@@ -1,0 +1,107 @@
+.profile-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+    font-family: Poppins, sans-serif;
+}
+
+.profile-title {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #222;
+}
+
+.tab-list {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    justify-content: center;
+}
+
+.tab {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.tab-selected {
+    font-weight: bold;
+    border-bottom: 2px solid #5a4bff;
+}
+
+.comment-box {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+}
+
+.comment-details {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+    border: 1px solid #ddd;
+}
+
+.comment-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.comment-info {
+    font-size: 0.875rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.comment-info a {
+    text-decoration: underline;
+    color: #5a4bff;
+}
+
+.pagination-controls,
+.profile-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+.pagination-controls button,
+.profile-controls button {
+    padding: 0.4rem 0.8rem;
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.pagination-controls button:hover:not(:disabled),
+.profile-controls button:hover {
+    background: #4338ca;
+}
+
+.pagination-controls button:disabled {
+    background: #a5b4fc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.loading-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+}
