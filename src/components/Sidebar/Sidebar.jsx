@@ -16,20 +16,13 @@ export default function Sidebar({ disaster, onClose }) {
     })
     const [comments, setComments] = useState([])
     const [editComment, setEditComment] = useState(null)
+    const [error, setError] = useState()
+    const [createError, setCreateError] = useState({})
+    const [editError, setEditError] = useState({})
     const [newFormData, setNewFormData] = useState({
         content: formData.content
     })
 
-
-    async function fetchComments() {
-
-        try {
-            const { data } = await getComments(disaster.id)
-            setComments(data)
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -37,8 +30,11 @@ export default function Sidebar({ disaster, onClose }) {
         if (editComment) {
             return handleUpdate(editComment.id)
         }
-
         try {
+            if (!editComment && !formData.content.trim()) {
+                throw new Error('This field may not be blank')
+            }
+
             const { data } = await createComment({
                 content: formData.content,
                 event: disaster.id
@@ -46,21 +42,31 @@ export default function Sidebar({ disaster, onClose }) {
 
             setFormData({ content: '' })
             setComments(c => [data, ...c])
+            setCreateError({})
         } catch (error) {
-            console.log(error);
+            if (error.message === 'This field may not be blank') {
+                setCreateError({ content: error.message })
+            } else {
+                setCreateError(error.response.data || { content: 'Something went wrong.' })
+            }
         }
     }
 
     async function handleEditBtn(commentId) {
         setEditComment(commentId)
         setNewFormData({ content: commentId.content })
+        setEditError({})
+        setCreateError({})
     }
 
     async function handleDeleteBtn(commentId) {
         try {
             await deleteComment(commentId)
             setComments(c => c.filter(c => c.id !== commentId))
+            setEditError({})
+            setCreateError({})
         } catch (error) {
+            setError('Failed to delete comment');
             console.log(error);
         }
     }
@@ -75,24 +81,41 @@ export default function Sidebar({ disaster, onClose }) {
             setFormData({ content: '' })
             setEditComment(null)
         } catch (error) {
-            console.log(error);
+            if (error.message === 'This field may not be blank') {
+                setEditError(error.message)
+            } else {
+                setEditError(error.response.data || { content: 'Something went wrong.' })
+            }
         }
     }
 
     async function handleChange({ target: { value } }) {
         if (editComment) {
             setNewFormData({ ...newFormData, content: value })
+            setEditError({})
         } else {
             setFormData({ ...formData, content: value })
+            setCreateError({})
         }
     }
 
     async function handleCancel() {
         setEditComment(null)
+        setEditError({})
         setNewFormData({ content: '' })
     }
 
     useEffect(() => {
+    async function fetchComments() {
+
+        try {
+            const { data } = await getComments(disaster.id)
+            setComments(data)
+        } catch (error) {
+            setError('Failed to load comments');
+            console.log(error);
+        }
+    }
         if (disaster.id) {
             fetchComments()
         }
@@ -156,6 +179,9 @@ export default function Sidebar({ disaster, onClose }) {
                     </TabPanel>
 
                     <TabPanel className='sidetab-panel'>
+                        {createError.content && !editComment && <p className="comment-error">{createError.content}</p>}
+                        {error && <p className="comment-error">{error}</p>}
+
                         {user
                             ?
                             <form onSubmit={handleSubmit} className='comment-form'>
@@ -190,6 +216,7 @@ export default function Sidebar({ disaster, onClose }) {
                                     {user && editComment && editComment.id === comment.id
                                         ? (
                                             <form onSubmit={handleSubmit}>
+                                                {editError.content && <p className="comment-error">{editError.content}</p>}
                                                 <Textarea className='comment-edit'
                                                     placeholder='Write a comment...'
                                                     rows='10'
@@ -210,8 +237,8 @@ export default function Sidebar({ disaster, onClose }) {
                                                     <p className='comment-text'>{comment.content}</p>
                                                     {user && comment.author && comment.author === user.id && (
                                                         <div className="comment-controls">
-                                                            <TrashIcon className='icon-small' onClick={() => handleDeleteBtn(comment.id)} />
-                                                            <PencilIcon className='icon-small' onClick={() => handleEditBtn(comment)} />
+                                                            <TrashIcon className='icon-small controls' onClick={() => handleDeleteBtn(comment.id)} />
+                                                            <PencilIcon className='icon-small controls' onClick={() => handleEditBtn(comment)} />
                                                         </div>
                                                     )}
                                                 </div>

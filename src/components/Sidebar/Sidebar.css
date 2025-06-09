@@ -122,8 +122,13 @@
   flex-direction: row-reverse;
 }
 
-.comment-author a:link {
+.controls {
+  cursor: pointer;
+}
+
+.comment-author a {
   text-decoration: none;
+  color: #000;
 }
 
 .comment-submit,
@@ -183,4 +188,22 @@
 
 .status-Ongoing {
     color: #cf9800;
+}
+
+.comment-error {
+  color: red;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 1620px) {
+  .disaster-description {
+    min-height: 420px;
+  }
+}
+
+@media (min-width: 2060px) {
+  .disaster-description {
+    min-height: 740px;
+  }
 }
