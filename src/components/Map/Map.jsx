@@ -4,8 +4,9 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { getDisasters } from '../../services/reliefDisasters'
 import SidebarTab from '../Sidebar/Sidebar'
-import { useSearchParams } from 'react-router'
+import { useNavigate, useSearchParams } from 'react-router'
 import { Button } from '@headlessui/react'
+import { markerImages, markerCursors } from '../../lib/mapHelper'
 
 export default function DisasterMap() {
     const disasterLookupRef = useRef(new Map())
@@ -15,6 +16,7 @@ export default function DisasterMap() {
     const [disasters, setDisasters] = useState([])
     const [searchParams] = useSearchParams()
     const eventIdFocuser = searchParams.get('event')
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -27,15 +29,14 @@ export default function DisasterMap() {
 
         mapRef.current.on('load', () => {
             fetchDisasters()
-            mapRef.current.loadImage('/red.png', (error, image) => {
-                if (!error && image) mapRef.current.addImage('marker-red', image)
-            })
-            mapRef.current.loadImage('/yellow.png', (error, image) => {
-                if (!error && image) mapRef.current.addImage('marker-yellow', image)
-            })
-            mapRef.current.loadImage('/blue.png', (error, image) => {
-                if (!error && image) mapRef.current.addImage('marker-blue', image)
-            })
+
+            markerImages(mapRef.current, [
+                { name: 'marker-red', url: '/red.png' },
+                { name: 'marker-yellow', url: '/yellow.png' },
+                { name: 'marker-blue', url: '/blue.png' },
+            ])
+
+            markerCursors(mapRef.current, ['clusters', 'unclustered-point'])
 
         })
 
@@ -199,6 +200,7 @@ export default function DisasterMap() {
             curve: 1.2
         })
         setSelectedDisaster(null)
+        navigate('/map')
     }
 
     return (
