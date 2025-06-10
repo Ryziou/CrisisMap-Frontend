@@ -114,9 +114,9 @@ export default function Home() {
                                             cy='50%'
                                             outerRadius={100}
                                         >
-                                            <Cell fill="#4f46e5" />
-                                            <Cell fill="#f59e0b" />
                                             <Cell fill="#ef4444" />
+                                            <Cell fill="#f59e0b" />
+                                            <Cell fill="#4f46e5" />
                                         </Pie>
                                         <Tooltip />
                                         <Legend formatter={(value) => {
