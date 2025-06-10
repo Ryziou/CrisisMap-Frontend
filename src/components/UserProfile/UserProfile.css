@@ -78,7 +78,8 @@
 }
 
 .pagination-controls button,
-.profile-controls button {
+.profile-controls button,
+.profile-controls a {
     padding: 0.4rem 0.8rem;
     background: #4f46e5;
     color: white;
@@ -86,10 +87,12 @@
     border-radius: 6px;
     cursor: pointer;
     transition: background 0.2s ease;
+    text-decoration: none;
 }
 
 .pagination-controls button:hover:not(:disabled),
-.profile-controls button:hover {
+.profile-controls button:hover,
+.profile-controls a:hover {
     background: #4338ca;
 }
 

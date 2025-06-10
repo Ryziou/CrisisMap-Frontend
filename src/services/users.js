@@ -18,7 +18,21 @@ export const getOwnProfile = async () => {
 
 export const getPublicProfile = async (userId) => {
     try {
+        const token = getToken()
         return axios.get(`${BASE_URL}/auth/profile/${userId}`, {
+            headers: token ? {
+                Authorization: `Bearer ${getToken()}`} : {}
+            
+        })
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
+export const updateProfile = async (formData) => {
+    try {
+        return axios.put(`${BASE_URL}/auth/profile/`, formData, {
             headers: {
                 Authorization: `Bearer ${getToken()}`
             }
@@ -29,22 +43,9 @@ export const getPublicProfile = async (userId) => {
     }
 }
 
-export const updateProfile = async (userId, formData) => {
+export const deleteProfile = async () => {
     try {
-        return axios.put(`${BASE_URL}/auth/profile/${userId}/`, formData, {
-            headers: {
-                Authorization: `Bearer ${getToken()}`
-            }
-        })
-    } catch (error) {
-        console.log(error);
-        throw error
-    }
-}
-
-export const deleteProfile = async (userId) => {
-    try {
-        return axios.delete(`${BASE_URL}/auth/profile/${userId}`, {
+        return axios.delete(`${BASE_URL}/auth/profile/`, {
             headers: {
                 Authorization: `Bearer ${getToken()}`
             }
@@ -57,10 +58,11 @@ export const deleteProfile = async (userId) => {
 
 export const getUserComments = async (userId) => {
     try {
+        const token = getToken()
         return axios.get(`${BASE_URL}/comments/?user=${userId}`, {
-            headers: {
-                Authorization: `Bearer ${getToken()}`
-            }
+            headers: token ? {
+                Authorization: `Bearer ${getToken()}`} : {}
+            
         })
     } catch (error) {
         console.log(error);
