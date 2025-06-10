@@ -56,3 +56,16 @@
   width: 100%;
   overflow: hidden;
 }
+
+.reset-camera-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  background-color: #ffffffee;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-weight: bold;
+}

@@ -223,7 +223,7 @@ export default function Sidebar({ disaster, onClose }) {
                             ? (<>
                                 {paginatedComments.map(comment => (
                                     <div key={comment.id} className='comment-container'>
-                                        {user && editComment && editComment.id === comment.id
+                                        {user && editComment === comment.id
                                             ? (
                                                 <form onSubmit={handleSubmit}>
                                                     {editError.content && <p className="comment-error">{editError.content}</p>}
