@@ -1,19 +1,23 @@
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../contexts/UserContext"
-import { useParams } from "react-router"
-import { getOwnProfile, getPublicProfile, getUserComments } from '../../services/users'
+import { Navigate, NavLink, useNavigate, useParams } from "react-router"
+import { deleteProfile, getOwnProfile, getPublicProfile, getUserComments } from '../../services/users'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels, Button } from "@headlessui/react"
 import './UserProfile.css'
 import PaginatedComments from "../PaginatedComments/PaginatedComments"
+import UserDelete from "../UserDelete/UserDelete"
+import { removeToken } from "../../lib/auth"
 
 
 export default function UserProfile() {
-    const { user } = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
     const { userId } = useParams()
     const [profile, setProfile] = useState(null)
     const [comments, setComments] = useState([])
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         async function fetchProfile() {
@@ -28,11 +32,26 @@ export default function UserProfile() {
             } catch (error) {
                 setError(error.response.data)
             } finally {
-                setIsLoading(true)
+                setIsLoading(false)
             }
         }
         fetchProfile()
     }, [userId, user])
+
+    if (!user && !userId) {
+        return <Navigate to='/authenticate?tab=register' replace/>
+    }
+
+    async function handleDelete() {
+        try {
+            await deleteProfile()
+            removeToken()
+            setUser(null)
+            navigate('/')
+        } catch (error) {
+            setError(error.response.data)
+        }
+    }
 
     return (
         <>
@@ -59,15 +78,18 @@ export default function UserProfile() {
                                             <div className="profile-details">
                                                 <p><strong>Username: </strong>{profile.username}</p>
                                                 <p><strong>Email: </strong> {profile.email}</p>
-                                                <div className="profile-controls">
-                                                    <Button>Edit Profile</Button>
-                                                    <Button>Delete Account</Button>
-                                                </div>
+                                                {user && user.id === profile.id &&
+                                                    <div className="profile-controls">
+                                                        <Button as={NavLink} to='/profile/edit'>Edit Profile</Button>
+                                                        <Button as={NavLink} onClick={() => setIsOpen(true)} >Delete Account</Button>
+                                                        <UserDelete isOpen={isOpen} onClose={() => setIsOpen(false)} onConfirm={handleDelete} />
+                                                    </div>
+                                                }
                                             </div>
                                         </TabPanel>
 
                                         <TabPanel>
-                                            <PaginatedComments comments={comments} currentUserId={user.id} />
+                                            <PaginatedComments comments={comments} currentUserId={user ? user.id : null} />
                                         </TabPanel>
                                     </TabPanels>
 

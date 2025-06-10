@@ -5,6 +5,7 @@ import Map from './components/Map/Map'
 import Home from './components/Home/Home'
 import Authenticate from './components/Authenticate/Authenticate'
 import UserProfile from './components/UserProfile/UserProfile'
+import UserProfileEdit from './components/UserProfileEdit/UserProfileEdit'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Route path='/authenticate' element={<Authenticate />}/>
       <Route path='/profile' element={<UserProfile />}/>
       <Route path='/profile/:userId' element={<UserProfile />}/>
+      <Route path='/profile/edit' element={<UserProfileEdit />} />
     </Routes>
     </>
   )

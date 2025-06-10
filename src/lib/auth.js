@@ -22,7 +22,7 @@ export const getUserFromToken = () => {
     const payloadAsObj = JSON.parse(atob(payload))
 
     const timeNow = Date.now() / 1000
-    const expTime = payloadAsObj.expTime
+    const expTime = payloadAsObj.exp
 
     if(expTime < timeNow) {
         removeToken()

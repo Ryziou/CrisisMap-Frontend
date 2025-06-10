@@ -1,0 +1,115 @@
+.dialog-container {
+  position: relative;
+  z-index: 1000;
+}
+
+.transition-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.dialog-box {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.dialog-panel {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.dialog-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.dialog-message {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.dialog-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+}
+
+.cancel-btn {
+  background-color: #eee;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background-color: #ddd;
+}
+
+.delete-btn {
+  background-color: #e11d48;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #be123c;
+}
+
+.transition-backdrop-enter {
+  transition: opacity 300ms ease-out;
+}
+.transition-backdrop-enterFrom {
+  opacity: 0;
+}
+.transition-backdrop-enterTo {
+  opacity: 1;
+}
+.transition-backdrop-leave {
+  transition: opacity 200ms ease-in;
+}
+.transition-backdrop-leaveFrom {
+  opacity: 1;
+}
+.transition-backdrop-leaveTo {
+  opacity: 0;
+}
+
+.transition-enter {
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+.transition-enterFrom {
+  opacity: 0;
+  transform: scale(0.95);
+}
+.transition-enterTo {
+  opacity: 1;
+  transform: scale(1);
+}
+.transition-leave {
+  transition: opacity 200ms ease-in, transform 200ms ease-in;
+}
+.transition-leaveFrom {
+  opacity: 1;
+  transform: scale(1);
+}
+.transition-leaveTo {
+  opacity: 0;
+  transform: scale(0.95);
+}
