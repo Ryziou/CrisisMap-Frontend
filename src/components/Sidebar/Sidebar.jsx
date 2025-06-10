@@ -37,10 +37,10 @@ export default function Sidebar({ disaster, onClose }) {
         e.preventDefault()
 
         if (editComment) {
-            return handleUpdate(editComment.id)
+            return handleUpdate(editComment)
         }
         try {
-            if (!editComment && !formData.content.trim()) {
+            if (!formData.content.trim()) {
                 throw new Error('This field may not be blank')
             }
 
@@ -51,6 +51,7 @@ export default function Sidebar({ disaster, onClose }) {
 
             setFormData({ content: '' })
             setComments(c => [data, ...c])
+            setPage(0)
             setCreateError({})
         } catch (error) {
             if (error.message === 'This field may not be blank') {
@@ -61,9 +62,9 @@ export default function Sidebar({ disaster, onClose }) {
         }
     }
 
-    async function handleEditBtn(commentId) {
-        setEditComment(commentId)
-        setNewFormData({ content: commentId.content })
+    async function handleEditBtn(comment) {
+        setEditComment(comment.id)
+        setNewFormData({ content: comment.content })
         setEditError({})
         setCreateError({})
     }
