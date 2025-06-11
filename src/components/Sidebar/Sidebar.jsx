@@ -3,7 +3,7 @@ import { ChatBubbleLeftEllipsisIcon, InformationCircleIcon, XMarkIcon, PencilIco
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import './Sidebar.css'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 import { getComments, createComment, updateComment, deleteComment } from '../../services/comments'
 import { UserContext } from '../../contexts/UserContext'
 import { NavLink } from 'react-router'
@@ -19,6 +19,7 @@ export default function Sidebar({ disaster, onClose }) {
     const [comments, setComments] = useState([])
     const [editComment, setEditComment] = useState(null)
     const [error, setError] = useState()
+    const [isLoading, setIsLoading] = useState(false)
     const [createError, setCreateError] = useState({})
     const [editError, setEditError] = useState({})
     const [newFormData, setNewFormData] = useState({
@@ -30,8 +31,7 @@ export default function Sidebar({ disaster, onClose }) {
     const end = start + perPage
     const paginatedComments = comments.slice(start, end)
     const totalPages = Math.ceil(comments.length / perPage)
-
-
+    const sidebarRef = useRef()
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -117,16 +117,22 @@ export default function Sidebar({ disaster, onClose }) {
 
     useEffect(() => {
         async function fetchComments() {
-
+            setIsLoading(true)
             try {
                 const { data } = await getComments(disaster.id)
                 setComments(data)
             } catch (error) {
                 setError('Failed to load comments');
                 console.log(error);
+            } finally {
+                setIsLoading(false)
             }
         }
         if (disaster.id) {
+            setPage(0)
+            if (sidebarRef.current) {
+                sidebarRef.current.scrollTop = 0
+            }
             fetchComments()
         }
     }, [disaster])
@@ -141,7 +147,7 @@ export default function Sidebar({ disaster, onClose }) {
     const capitalizedStatus = disaster.status.charAt(0).toUpperCase() + disaster.status.slice(1)
 
     return (
-        <div className="sidebar-tab">
+        <div className="sidebar-tab" ref={sidebarRef}>
             <div className="sidebar-header">
                 <h2 className="sidebar-title">
                     {splitName[0]} - {disaster.primary_type.name}
@@ -219,8 +225,10 @@ export default function Sidebar({ disaster, onClose }) {
                             </form>
 
                         }
-
-                        {paginatedComments.length > 0
+                        {isLoading ? (
+                            <p className='loading-message'>Loading comments...</p>
+                        ) : ( 
+                            paginatedComments.length > 0
                             ? (<>
                                 {paginatedComments.map(comment => (
                                     <div key={comment.id} className='comment-container'>
@@ -282,7 +290,9 @@ export default function Sidebar({ disaster, onClose }) {
                             </>
                             ) : (
                                 <p className='comment-empty'>No comments yet.</p>
-                            )}
+                            )
+                        )}
+
                     </TabPanel>
                 </TabPanels>
             </TabGroup>

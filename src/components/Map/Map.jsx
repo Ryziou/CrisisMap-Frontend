@@ -12,17 +12,18 @@ import yellowMarker from '../../images/yellow.png'
 import blueMarker from '../../images/blue.png'
 
 export default function DisasterMap() {
-    const disasterLookupRef = useRef(new Map())
+    const disasterLookupRef = useRef(new Map()) // Map of ID for disaster events
     const mapRef = useRef()
     const mapContainerRef = useRef()
-    const [selectedDisaster, setSelectedDisaster] = useState(null)
-    const [disasters, setDisasters] = useState([])
+    const [selectedDisaster, setSelectedDisaster] = useState(null) // Selected disaster event
+    const [disasters, setDisasters] = useState([]) // Array of disaster events
     const [searchParams] = useSearchParams()
     const eventIdFocuser = searchParams.get('event')
     const navigate = useNavigate()
 
 
     useEffect(() => {
+        // Adds the map
         mapboxgl.accessToken = import.meta.env.VITE_API_SECRET_TOKEN
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current,
@@ -42,7 +43,7 @@ export default function DisasterMap() {
             markerCursors(mapRef.current, ['clusters', 'unclustered-point'])
 
         })
-
+        // Randomizes marker placements to avoid overlapping due to same coordinates in Reliefweb API
         function spreadMarkers([lon, lat], index) {
             const spreadAmount = 0.1 + Math.random() * 0.1
             const angle = (2 * Math.PI * index) / 10
@@ -123,10 +124,8 @@ export default function DisasterMap() {
                     type: 'symbol',
                     source: 'disasters',
                     filter: ['has', 'point_count'],
-                    layout: {
-                        'text-field': '{point_count_abbreviated}',
-                        'text-size': 12
-                    }
+                    layout: {'text-field': '{point_count_abbreviated}',
+                            'text-size': 25}
                 })
 
                 mapRef.current.addLayer({
@@ -135,7 +134,8 @@ export default function DisasterMap() {
                     source: 'disasters',
                     filter: ['!', ['has', 'point_count']],
                     layout: {
-                        'icon-image': ['match', ['get', 'status'],
+                        'icon-image': [
+                            'match', ['get', 'status'],
                             'alert', 'marker-red',
                             'ongoing', 'marker-yellow',
                             'past', 'marker-blue',
