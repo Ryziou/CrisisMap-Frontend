@@ -31,9 +31,9 @@ export default function DisasterMap() {
             fetchDisasters()
 
             markerImages(mapRef.current, [
-                { name: 'marker-red', url: '/red.png' },
-                { name: 'marker-yellow', url: '/yellow.png' },
-                { name: 'marker-blue', url: '/blue.png' },
+                { name: 'marker-red', url: '../../images/red.png' },
+                { name: 'marker-yellow', url: '../../images/yellow.png' },
+                { name: 'marker-blue', url: '../../images/blue.png' },
             ])
 
             markerCursors(mapRef.current, ['clusters', 'unclustered-point'])
