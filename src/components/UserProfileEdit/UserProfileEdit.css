@@ -2,7 +2,7 @@
     max-width: 600px;
     margin: 4rem auto;
     padding: 2rem;
-    background-color: #ffffff;
+    background-color: #1e1e2f;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -16,7 +16,7 @@
     display: block;
     font-size: 0.95rem;
     font-weight: 500;
-    color: #374151;
+    color: #f1f5f9;
     margin-bottom: 0.5rem;
 }
 
@@ -27,6 +27,8 @@
     border: 1px solid #d1d5db;
     border-radius: 8px;
     transition: border 0.2s ease;
+    color: #f1f5f9;
+    background-color: #2f2f44;
 }
 
 .profile-input:focus {
@@ -63,4 +65,8 @@
 
 .profile-btn:hover {
     background: #4338ca;
+}
+
+.profile-input::placeholder {
+    color: #94a3b8;
 }

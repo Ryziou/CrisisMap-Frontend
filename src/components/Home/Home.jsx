@@ -81,9 +81,17 @@ export default function Home() {
                                         <CartesianGrid strokeDasharray='3 3' />
                                         <XAxis dataKey='month' />
                                         <YAxis />
-                                        <Tooltip />
+                                        <Tooltip contentStyle={{
+                                            backgroundColor: '#2a2a40',
+                                            border: '1px solid #3b3b5c',
+                                            color: '#f1f5f9'
+                                        }}
+                                            labelStyle={{
+                                                color: '#cbd5e1'
+                                            }}
+                                        />
                                         <Legend formatter={(value) => { if (value === 'count') return 'Disasters' }} />
-                                        <Line type='monotone' dataKey='count' stroke="#8884d8" />
+                                        <Line type='monotone' dataKey='count' stroke="#7fc096" />
                                     </LineChart>
                                 </ResponsiveContainer>
                             </div>
@@ -97,9 +105,17 @@ export default function Home() {
                                         <YAxis />
                                         <Tooltip formatter={(value, name) => [value, name]}
                                             labelFormatter={(label) => Object.fromEntries(stats.top_countries.map(item => [item.iso3, item.name]))[label]}
+                                            contentStyle={{
+                                                backgroundColor: '#2a2a40',
+                                                border: '1px solid #3b3b5c',
+                                                color: '#f1f5f9'
+                                            }}
+                                            labelStyle={{
+                                                color: '#cbd5e1'
+                                            }}
                                         />
-                                        <Bar dataKey='disasters' fill="#8884d8" />
-                                        <Legend formatter={(value) => { if (value === 'disasters') return 'Amount of Disasters' }}/>
+                                        <Bar dataKey='disasters' fill="#7fc096" />
+                                        <Legend formatter={(value) => { if (value === 'disasters') return 'Amount of Disasters' }} />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </div>
@@ -118,7 +134,18 @@ export default function Home() {
                                             <Cell fill="#f59e0b" />
                                             <Cell fill="#4f46e5" />
                                         </Pie>
-                                        <Tooltip />
+                                        <Tooltip
+                                            contentStyle={{
+                                                backgroundColor: '#2a2a40',
+                                                border: '1px solid #3b3b5c',
+                                                color: '#f1f5f9',
+                                                borderRadius: '6px',
+                                            }}
+                                            itemStyle={{
+                                                color: '#7fc096',
+                                                fontWeight: 'bold'
+                                            }}
+                                        />
                                         <Legend formatter={(value) => {
                                             if (value === 'alert') return 'Alert'
                                             if (value === 'ongoing') return 'Ongoing'
@@ -138,7 +165,13 @@ export default function Home() {
                                         <PolarGrid />
                                         <PolarAngleAxis dataKey='disaster' />
                                         <Radar name="Disaster Frequency" dataKey='displayValue' stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
-                                        <Tooltip formatter={(value, name, props) => { return [`${props.payload.count}`, 'count'] }} />
+                                        <Tooltip formatter={(value, name, props) => { return [`${props.payload.count}`, 'count'] }}
+                                            contentStyle={{
+                                                backgroundColor: '#2a2a40',
+                                                border: '1px solid #3b3b5c',
+                                                color: '#f1f5f9'
+                                            }}
+                                        />
                                         <Legend />
                                     </RadarChart>
                                 </ResponsiveContainer>

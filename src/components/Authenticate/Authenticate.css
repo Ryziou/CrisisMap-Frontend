@@ -4,10 +4,11 @@
     max-width: 420px;
     margin: 4rem auto;
     padding: 2rem;
-    border: 1px solid #ccc;
+    border: 1px solid #3b3b5c;
     border-radius: 6px;
-    background: #f9f9f9;
+    background: #2a2a40;
     box-sizing: border-box;
+    color: #f1f5f9;
 }
 
 .auth-options {
@@ -40,6 +41,7 @@
     cursor: pointer;
     font-weight: bold;
     border-bottom: 2px solid transparent;
+    color: #94a3b8;
 }
 
 .auth-label {
@@ -52,17 +54,19 @@
 .auth-input {
     width: 100%;
     padding: 0.75rem 1rem;
-    background-color: #d3d3d4;
+    background-color: #2f2f44;
     border: 1px solid #444;
+    border-color: #3b3b5c;
     border-radius: 6px;
     font-size: 0.95rem;
+    color: #f1f5f9;
 }
 
 .auth-btn[type="submit"] {
     margin: 0 auto;
     margin-left: 100px;
     width: 150px;
-    background-color: #c2c2c2;
+    background-color: #4f46e5;
     font-weight: bold;
     padding: 0.75rem;
     border: none;
@@ -70,6 +74,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 2rem;
+    color: white;
 }
 
 .error-message {
@@ -80,13 +85,15 @@
 }
 
 .auth-input::placeholder {
-    color: #777;
+    color: #94a3b8;
 }
 
 .auth-selected {
     border-color: #333;
+    border-bottom: #6366f1;
+    color: #f1f5f9;
 }
 
 .auth:hover {
-    background-color: #ededed;
+    background-color: #373753;
 }

@@ -4,12 +4,14 @@
   left: 0;
   width: 350px;
   height: 100%;
-  background-color: #fff;
+  background-color: #2a2a40;
   z-index: 1000;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  color: #f1f5f9;
+  border-left: #3b3b5c;
 }
 
 .sidebar-header {
@@ -28,7 +30,7 @@
 
 .sidetab-list {
   display: flex;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #3b3b5c;
 }
 
 .sidetab-btn {
@@ -39,16 +41,17 @@
   border: none;
   font-weight: 500;
   cursor: pointer;
-  color: #333;
+  color: #94a3b8;
 }
 
 .sidetab-btn[aria-selected="true"] {
-  border-bottom: 3px solid #000;
+  border-bottom: 3px solid #6366f1;
   font-weight: bold;
+  color: #f1f5f9;
 }
 
 .sidetab-btn:hover {
-  background-color: #ededed
+  background-color: #373753;
 }
 
 .sidetab-panel {
@@ -57,8 +60,7 @@
 
 .disaster-link {
   display: block;
-  color: #2563eb;
-  text-decoration: underline;
+  color: #7fc096;
   font-style: italic;
   font-size: 0.85rem;
   margin-bottom: 0.25rem;
@@ -75,13 +77,15 @@
 }
 
 .comment-container {
-  border: 1px solid #ddd;
+  border: 1px solid #3b3b5c;
   border-radius: 6px;
   padding: 0.75rem;
   margin-bottom: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   word-wrap: break-word;
   overflow-wrap: break-word;
+  background-color: #2a2a40;
+  color: #f1f5f9;
 }
 
 .comment-form {
@@ -90,7 +94,7 @@
 
 .comment-author {
   font-weight: 600;
-  color: #4f46e5;
+  color: #f1f5f9;
   margin-bottom: 0.25rem;
   margin-top: 0;
   padding: 0;
@@ -109,6 +113,9 @@
   width: 100%;
   box-sizing: border-box;
   max-width: 100%;
+  background-color: #3b3b5c;
+  color: #f1f5f9;
+  border: 1px solid #3b3b5c;
 }
 
 .comment-text {
@@ -126,9 +133,16 @@
   cursor: pointer;
 }
 
-.comment-author a {
-  text-decoration: none;
-  color: #000;
+.comment-information {
+  color: #94a3b8;
+}
+
+.comment-information a {
+  color: #7fc096;
+}
+
+.markdown-link {
+  color: #7fc096;
 }
 
 .comment-submit,
@@ -160,16 +174,19 @@
 .icon {
   width: 24px;
   height: 24px;
+  color: #f1f5f9;
 }
 
 .icon-small {
   width: 20px;
   height: 20px;
+  color: #f1f5f9;
 }
 
 .icon-tiny {
   width: 16px;
   height: 16px;
+  color: #f1f5f9;
 }
 
 .sidetab-label {

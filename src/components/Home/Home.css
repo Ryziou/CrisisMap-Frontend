@@ -1,4 +1,5 @@
 .home-container {
+    max-width: 1700px;
     padding: 1rem 5rem;
     margin: 0 auto;
 }
@@ -29,16 +30,18 @@
     padding: 25px 0 25px 0;
     border: 1px solid #ddd;
     border-radius: 0.5rem;
-    background-color: #fff;
+    background-color: #1e1e2f;
     text-align: center;
     font-size: 1.1rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    border-color: #3b3b5c;
+    color: #f1f5f9;
 }
 
 .stats-title {
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .chart-container {

@@ -190,7 +190,7 @@ export default function Sidebar({ disaster, onClose }) {
                         <div className='disaster-description'>
                             <ReactMarkdown remarkPlugins={[remarkGfm]} 
                             components={{ a: ({ ...props }) => ( 
-                            <a { ...props } target='_blank' rel='noopener noreferrer' />)}}>
+                            <a { ...props } target='_blank' rel='noopener noreferrer' className='markdown-link'/>)}}>
                                 {disaster.description}
                             </ReactMarkdown>
                         </div>
@@ -251,7 +251,7 @@ export default function Sidebar({ disaster, onClose }) {
                                                 </form>
                                             ) : (
                                                 <>
-                                                    <div className="comment-info">
+                                                    <div className="comment-information">
                                                         <h3 className='comment-author'>
                                                             <NavLink to={`/profile/${comment.author}`}>{comment.author_username}</NavLink>
                                                         </h3>
@@ -262,7 +262,7 @@ export default function Sidebar({ disaster, onClose }) {
                                                                 <PencilIcon className='icon-small controls' onClick={() => handleEditBtn(comment)} />
                                                             </div>
                                                         )}
-                                                        <div className="comment-info">
+                                                        <div className="comment-information">
                                                             <small>
                                                                 {formatDates(comment.created_at, comment.event)} - <NavLink to={`/map?event=${comment.event}`}>{comment.event}</NavLink>
                                                             </small>
