@@ -56,6 +56,11 @@
     word-break: break-word;
 }
 
+.comment-empty {
+    display: flex;
+    justify-content: center;
+}
+
 .comment-info {
     font-size: 0.875rem;
     color: #555;

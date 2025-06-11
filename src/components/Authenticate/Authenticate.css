@@ -60,6 +60,7 @@
 
 .auth-btn[type="submit"] {
     margin: 0 auto;
+    margin-left: 100px;
     width: 150px;
     background-color: #c2c2c2;
     font-weight: bold;
@@ -72,10 +73,10 @@
 }
 
 .error-message {
-  color: #d33;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-  height: 0;
+    color: #d33;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    height: 0;
 }
 
 .auth-input::placeholder {
