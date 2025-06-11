@@ -12,18 +12,25 @@ export default function PaginatedComments({ comments, perPage = 5 }) {
 
     return (
         <div className="comments-container">
-            <ul className="comment-box">
-                {paged.map(comment => (
-                    <li key={comment.id} className="comment-details">
-                        <p className="comment-text">{comment.content}</p>
-                        <div className="comment-info">
-                            <small>
-                                {formatDates(comment.created_at, comment.event)} - <NavLink to={`/map?event=${comment.event}`}>{comment.event}</NavLink>
-                            </small>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+            {comments.length > 0
+                ? (
+                    <ul className="comment-box">
+                        {paged.map(comment => (
+                            <li key={comment.id} className="comment-details">
+                                <p className="comment-text">{comment.content}</p>
+                                <div className="comment-info">
+                                    <small>
+                                        {formatDates(comment.created_at, comment.event)} - <NavLink to={`/map?event=${comment.event}`}>{comment.event}</NavLink>
+                                    </small>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="comment-empty">You have not made any comments yet.</p>
+                )
+            }
+
             {totalPages > 1 && (
                 <div className="pagination-controls">
                     <Button

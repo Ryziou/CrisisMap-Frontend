@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { registerUser, loginUser } from '../../services/auth'
 import { useSearchParams, useNavigate, Navigate } from 'react-router'
 import { Button, TabGroup, TabList, TabPanel, TabPanels, Field, Label, Input, Tab } from '@headlessui/react'
@@ -7,12 +7,10 @@ import { getUserFromToken, setToken } from '../../lib/auth'
 import { UserContext } from '../../contexts/UserContext'
 
 export default function UserRegister() {
-    const [searchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
     const tabParam = searchParams.get('tab')
     const { user, setUser } = useContext(UserContext)
-    const [selectedAuthTab, setSelectedAuthTab] = useState(
-        tabParam === 'register' ? 0 : 1
-    )
+    const selectedAuthTab = tabParam === 'register' ? 0 : 1
     const [registerData, setRegisterData] = useState({
         email: '',
         username: '',
@@ -28,24 +26,20 @@ export default function UserRegister() {
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (tabParam === 'register') setSelectedAuthTab(0)
-        if (tabParam === 'login') setSelectedAuthTab(1)
-    }, [tabParam])
-
     async function handleSubmit(e) {
         e.preventDefault()
         setIsLoading(true)
         try {
             if (selectedAuthTab === 0) {
                 await registerUser(registerData)
-                setSelectedAuthTab(1)
+                setSearchParams({ tab: 'login'})
                 setRegisterData({
                     email: '',
                     username: '',
                     password: '',
                     password_confirmation: ''
                 })
+                setError({})
                 return
             } else {
                 const { data } = await loginUser({
@@ -77,7 +71,13 @@ export default function UserRegister() {
 
     return (
         <section className="auth-container">
-            <TabGroup selectedIndex={selectedAuthTab} onChange={setSelectedAuthTab}>
+            <TabGroup 
+            selectedIndex={selectedAuthTab} 
+            onChange={(index) => { 
+                const tabChange = index === 0 ? 'register' : 'login'; 
+                setSearchParams({ tab: tabChange})
+                setError({})
+                }}>
                 <TabList className='auth-options'>
                     <Tab className={({ selected }) =>
                         selected ? 'auth auth-selected' : 'auth'
