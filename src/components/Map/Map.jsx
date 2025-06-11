@@ -7,6 +7,9 @@ import SidebarTab from '../Sidebar/Sidebar'
 import { useNavigate, useSearchParams } from 'react-router'
 import { Button } from '@headlessui/react'
 import { markerImages, markerCursors } from '../../lib/mapHelper'
+import redMarker from '../../images/red.png'
+import yellowMarker from '../../images/yellow.png'
+import blueMarker from '../../images/blue.png'
 
 export default function DisasterMap() {
     const disasterLookupRef = useRef(new Map())
@@ -31,9 +34,9 @@ export default function DisasterMap() {
             fetchDisasters()
 
             markerImages(mapRef.current, [
-                { name: 'marker-red', url: '../../images/red.png' },
-                { name: 'marker-yellow', url: '../../images/yellow.png' },
-                { name: 'marker-blue', url: '../../images/blue.png' },
+                { name: 'marker-red', url: redMarker },
+                { name: 'marker-yellow', url: yellowMarker },
+                { name: 'marker-blue', url: blueMarker },
             ])
 
             markerCursors(mapRef.current, ['clusters', 'unclustered-point'])
