@@ -10,3 +10,10 @@
   outline: none !important;
   box-shadow: none !important;
 }
+
+html, body {
+  background-color: #1e1e2f;
+  color: #f1f5f9;
+  margin: 0;
+  padding: 0;
+}

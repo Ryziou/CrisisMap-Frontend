@@ -4,8 +4,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* temporarily set the background color so we can tell where the map container is positioned */
-  background-color: lightgrey;
   height: 100%;
 }
 
@@ -62,10 +60,16 @@
   top: 1rem;
   right: 1rem;
   z-index: 1000;
-  background-color: #ffffffee;
+  background-color: #4f46e5;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: none;
   cursor: pointer;
   font-weight: bold;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.reset-camera-btn:hover {
+  background-color: #4338ca;
 }
