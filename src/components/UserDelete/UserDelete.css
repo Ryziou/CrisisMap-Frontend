@@ -19,11 +19,12 @@
 }
 
 .dialog-panel {
-  background-color: white;
+  background-color: #2a2a40;
+  color: #f1f5f9;
   border-radius: 12px;
   padding: 2rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 420px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
@@ -31,13 +32,12 @@
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #333;
 }
 
 .dialog-message {
   font-size: 1rem;
   margin-bottom: 1.5rem;
-  color: #555;
+  color: #cbd5e1;
 }
 
 .dialog-controls {
@@ -47,20 +47,21 @@
 }
 
 .btn {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
   border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
   border: none;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .cancel-btn {
-  background-color: #eee;
-  color: #333;
+  background-color: #3b3b5c;
+  color: #f1f5f9;
 }
 
 .cancel-btn:hover {
-  background-color: #ddd;
+  background-color: #4b4b6a;
 }
 
 .delete-btn {
