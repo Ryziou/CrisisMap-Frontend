@@ -20,6 +20,7 @@ export default function UserProfile() {
     const navigate = useNavigate()
 
     useEffect(() => {
+        if (!user && !userId) return
         async function fetchProfile() {
             setIsLoading(true)
             try {
