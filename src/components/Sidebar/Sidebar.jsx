@@ -175,7 +175,7 @@ export default function Sidebar({ disaster, onClose }) {
 
                 <TabPanels>
                     <TabPanel className='sidetab-panel'>
-                        <a href={disaster.url} className="disaster-link">
+                        <a href={disaster.url} className="disaster-link" target='_blank' rel='noopener noreferrer'>
                             <GlobeAmericasIcon className="icon-small" />
                             View report on ReliefWeb
                         </a>
@@ -188,7 +188,9 @@ export default function Sidebar({ disaster, onClose }) {
                         <p className='disaster-type'><strong>Primary Country:</strong> {country}</p>
                         <p className='disaster-type'><strong>Affected Countries:</strong> {affected}</p>
                         <div className='disaster-description'>
-                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]} 
+                            components={{ a: ({ ...props }) => ( 
+                            <a { ...props } target='_blank' rel='noopener noreferrer' />)}}>
                                 {disaster.description}
                             </ReactMarkdown>
                         </div>
