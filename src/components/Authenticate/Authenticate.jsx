@@ -168,6 +168,7 @@ export default function UserRegister() {
                                 </Input>
                                 {error.password && <p className='error-message'>{error.password}</p>}
                                 {error.detail && <p className='error-message'>{error.detail}</p>}
+                                {error.non_field_errors && <p className='error-message'>{error.non_field_errors}</p>}
                             </Field>
                             <Button className='auth-btn' type='submit'>{isLoading ? 'Logging In...' : 'Log In'}</Button>
                         </form>

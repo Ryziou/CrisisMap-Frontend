@@ -11,7 +11,8 @@ export default function UserProfileEdit() {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
-        password: ''
+        password: '',
+        password_confirmation: ''
     })
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -21,7 +22,7 @@ export default function UserProfileEdit() {
         async function fetchProfile() {
             try {
                 const { data } = await getOwnProfile()
-                setFormData({ ...data, password: ''})
+                setFormData({ ...data, password: '', password_confirmation: ''})
             } catch (error) {
                 setError(error.response.data)
             }
@@ -35,6 +36,7 @@ export default function UserProfileEdit() {
         const payload = { ...formData}
         if (!payload.password) {
             delete payload.password
+            delete payload.password_confirmation
         }
         try {
             await updateProfile(payload)
@@ -90,9 +92,20 @@ export default function UserProfileEdit() {
                     >
                     </Input>
                     {error.password && <p className='error-message'>{error.password}</p>}
+                </Field>
+                <Field name='password_confirmation'>
+                    <Label className='profile-label' htmlFor='password_confirmation'>Confirm Password</Label>
+                    <Input
+                        className='profile-input'
+                        id='password_confirmation' type='password'
+                        onChange={handleChange} value={formData.password_confirmation}
+                        placeholder='Confirm Password'
+                    >
+                    </Input>
+                    {error.password_confirmation && <p className='error-message'>{error.password_confirmation}</p>}
+                </Field>
                     {error.detail && <p className='error-message'>{error.detail}</p>}
                     {error.non_field_errors && <p className='error-message'>{error.non_field_errors}</p>}
-                </Field>
                 <div className="profile-edit-btn">
                     <Button className='profile-btn' type='submit'>{isLoading ? 'Updating...' : 'Update'}</Button>
                 </div>
