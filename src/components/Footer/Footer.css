@@ -1,0 +1,14 @@
+.footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+
+}
+
+.footer-info {
+    margin: 0;
+}
+
+.footer-info a {
+    color: #7fc096;
+}
