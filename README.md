@@ -14,7 +14,7 @@ Back-end: https://github.com/Ryziou/CrisisMap-Backend
 
 ## Deployment link
 
-<a href="https://crisismap.netlify.app/" target="_blank" rel="noopener noreferrer">Click here to try out the CrisisMap website!</a>
+[Click here to try out the CrisisMap website!](https://crisismap.netlify.app/)
 
 ## Getting Started/Code Installation
 
@@ -67,18 +67,18 @@ This project started on 04/06/2025 and It was completed on 12/06/2025.
 
 #### Researching
 
-<a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">Google</a><br>
-<a href="https://developer.mozilla.org/en-US/" target="_blank" rel="noopener noreferrer">MDN Web Docs</a><br>
-<a href="https://django-rest-framework-simplejwt.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener noreferrer">Simple JWT</a><br>
-<a href="https://www.mapbox.com/" target="_blank" rel="noopener noreferrer">Mapbox</a><br>
-<a href="https://recharts.org/en-US" target="_blank" rel="noopener noreferrer">Recharts</a><br>
-<a href="https://react.dev/reference/react" target="_blank" rel="noopener noreferrer">React</a><br>
-<a href="https://reactrouter.com/home" target="_blank" rel="noopener noreferrer">React Router</a><br>
-<a href="https://headlessui.com/" target="_blank" rel="noopener noreferrer">HeadlessUI</a><br>
-<a href="https://heroicons.com/" target="_blank" rel="noopener noreferrer">Heroicons</a><br>
-<a href="https://www.netlify.com/" target="_blank" rel="noopener noreferrer">Netlify for Front-end Hosting</a><br>
-<a href="https://www.heroku.com/" target="_blank" rel="noopener noreferrer">Heroku for Back-end Hosting</a><br>
-<a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT for Seed DB</a><br> 
+[Google](https://www.google.com/)  
+[MDN Web Docs](https://developer.mozilla.org/en-US/)  
+[Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/index.html)  
+[Mapbox](https://www.mapbox.com/)  
+[Recharts](https://recharts.org/en-US)   
+[React](https://react.dev/reference/react)  
+[React Router](https://reactrouter.com/home)  
+[HeadlessUI](https://headlessui.com/)  
+[Heroicons](https://heroicons.com/)  
+[Netlify for Front-end Hosting](https://www.netlify.com/)  
+[Heroku for Back-end Hosting](https://www.heroku.com/)  
+[ChatGPT for Seed DB](https://chatgpt.com/)  
 
 
 ## Brief
