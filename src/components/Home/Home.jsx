@@ -51,7 +51,7 @@ export default function Home() {
                             </div>
                             <div className="stats-info">
                                 <div className="stats-title">
-                                    🆕 Most Disaster Recent:
+                                    🆕 Most Recent Disaster:
                                 </div>
                                 <div className="stats-value">
                                     {stats.recent_disaster.name.split(':')[0]}
