@@ -6,7 +6,7 @@ CrisisMap is a global disaster tracking and commentary application built to visu
 
 The application supports full user authentication, including account registeration, profile editing, and account deletion. Comments are permission-controlled so users can only modify or remove their own input. The homepage features a dashboard with data-driven visualizations such as a line, bar, radar, and pie charts. These provide insights into trends like disaster frequency, type distribution, and affected regions over time.
 
-This was created by using React, JavaScript, CSS, Django REST Framework, PostgreSQL, Mapbox GL JS, Recharts, React Router, Axios, ReactMarkdown, Remark-GFM, Headless UI, and Heroicons.
+This was created by using React, JavaScript, CSS, Django REST Framework, PostgreSQL, Mapbox GL JS, Recharts, React Router, Axios, ReactMarkdown, Remark-GFM, HeadlessUI, and Heroicons.
 
 Front-end: https://github.com/Ryziou/CrisisMap-Frontend 
 Back-end: https://github.com/Ryziou/CrisisMap-Backend
@@ -43,7 +43,7 @@ This project started on 04/06/2025 and It was completed on 12/06/2025.
     - CSS
     - JavaScript
     - Axios
-    - Headless UI
+    - HeadlessUI
     - Heroicons
 
 ### Back End / Development Tools
@@ -65,7 +65,7 @@ This project started on 04/06/2025 and It was completed on 12/06/2025.
 
 ### External websites used for researching or use
 
-#### Researching & Images
+#### Researching
 
 [Google](https://www.google.com/)  
 [MDN Web Docs](https://developer.mozilla.org/en-US/)  
@@ -73,9 +73,9 @@ This project started on 04/06/2025 and It was completed on 12/06/2025.
 [Mapbox](https://www.mapbox.com/)  
 [Recharts](https://recharts.org/en-US)   
 [React](https://react.dev/reference/react)  
-[React Router](https://reactrouter.com/home)   
-
-#### Others
+[React Router](https://reactrouter.com/home)  
+[HeadlessUI](https://headlessui.com/)  
+[Heroicons](https://heroicons.com/)  
 [Netlify for Front-end Hosting](https://www.netlify.com/)  
 [Heroku for Back-end Hosting](https://www.heroku.com/)  
 [ChatGPT for Seed DB](https://chatgpt.com/)  
@@ -183,7 +183,7 @@ This endpoint powers much of the CrisisMap dashboard. I use it to:
 - Group disasters by month for a historyical timeline line chart.
 
 ### Sidebar Integration with Mapbox
-The interactive map sidebar was designed to replicate the feel of Google Maps' one. Clicking a pin would reveal detailed disaster information and a comment thread regarding it. With thanks to Headless UI's tab components, I created a flexible sidebar system that conditionally renders tabs and ties directly into the global disaster data.
+The interactive map sidebar was designed to replicate the feel of Google Maps' one. Clicking a pin would reveal detailed disaster information and a comment thread regarding it. With thanks to HeadlessUI's tab components, I created a flexible sidebar system that conditionally renders tabs and ties directly into the global disaster data.
 
 ```jsx
 <SidebarTab
